@@ -1,0 +1,31 @@
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+body{
+  background-color: $secondary;
+}
+.container{
+  height: 80vh;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+.counter-wrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color:#fff;
+  width: 300px;
+  height: 300px;
+  background-color: purple;
+  margin: 0 auto;
+  border-radius: 10%;
+    p{
+    display: flex;
+    font-size: 50px !important;
+    }
+    h2{
+      border:1px solid white !important;
+      padding: 25px;
+    }
+  }
