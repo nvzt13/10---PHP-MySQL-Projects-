@@ -11844,37 +11844,5 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
-* {
-  text-align: center;
-  box-sizing: border-box;
-}
-
-header {
-  padding: 15px 0;
-  background-color: #E48168;
-  max-height: 767px;
-  max-width: 1024px;
-  color: #F5E9DB !important;
-}
-header .container {
-  align-content: center;
-}
-header .container .header-wrapper .line {
-  height: 100px;
-  width: 2px;
-  margin: 0 auto;
-  background-color: #F5E9DB;
-}
-header .container .button-wrapper button {
-  background-color: transparent;
-  color: #F5E9DB;
-  border: 1px solid white;
-}
-
-section, footer {
-  max-height: 767px;
-  max-width: 1024px;
-  background-color: #E48168;
-}
 
 /*# sourceMappingURL=style.css.map */

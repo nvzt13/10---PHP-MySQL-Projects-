@@ -1,8 +1,6 @@
-@import "../../node_modules/bootstrap/scss/bootstrap";
+@import "../../../../node_modules/bootstrap/scss/bootstrap";
 
-body{
-  background-color: $secondary;
-}
+
 .container{
   height: 80vh;
   display: flex;
@@ -25,7 +23,6 @@ body{
     font-size: 50px !important;
     }
     h2{
-      border:1px solid white !important;
       padding: 25px;
     }
   }

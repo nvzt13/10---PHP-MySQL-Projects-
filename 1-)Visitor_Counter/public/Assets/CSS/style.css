@@ -11844,10 +11844,6 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
-body {
-  background-color: #6c757d;
-}
-
 .container {
   height: 80vh;
   display: flex;
@@ -11872,7 +11868,6 @@ body {
   font-size: 50px !important;
 }
 .counter-wrapper h2, .counter-wrapper .h2 {
-  border: 1px solid white !important;
   padding: 25px;
 }
 

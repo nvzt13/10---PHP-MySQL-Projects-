@@ -1,162 +1,81 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Personal Blog</title>
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  
-  <!-- Header Start -->
-  <header>
-    <div class="container">
-      <div class="header-wrapper">
-        <p>Let me help you</p>
-        <h1>Write it right</h1>
-        <div class="line"></div>
-        <p>Nevzat Atalay</p>
-        <p>Frelance writor && Editor</p>
-      </div>
-      <div class="button-wrapper">
-        <button type="submit">Work with me</button>
-      </div>
-    </div>
-  </header>
-  <!-- Header End About Start--> 
-  <section>
-    <div class="container">
-      <div class="row py-5">
-        <div class="col-6" >
-          <div class="img-wrapper d-flex align-items-center">
-            <img class="img-fluid mx-auto" src="img/Person1.jpg" alt="" />
-          </div>
-        </div>
-        <div class="col-6">
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae earum, quo nulla optio commodi quaerat, neque iusto nam blanditiis cupiditate itaque placeat sapiente dignissimos quisquam beatae amet hic provident cumque!
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente dignissimos, rem dolorem quis deserunt, esse numquam error nobis repellat expedita dolores! Ipsum, reprehenderit corporis assumenda possimus vel nihil delectus! Odio.5</p>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius, quae?
-            </p>
-        </div>
+  <!------------Navbar Start-------->
+  <nav class="navbar navbar-expand-lg bg-dark">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <a class="navbar-brand" href="#">Hidden brand</a>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+        </ul>
       </div>
     </div>
-  </section>
-  <!--About End Servises Start --> 
-  <section>
-    <div class="container">
-      <div class="col">
-        <div id="row">
-          <h1>My Services</h1>
-        </div>
-        <div class="row">
-          <div class="col-3">
-            <h3>Lorem, ipsum dolor.</h3> 
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit, possimus!
-            </p>
-          </div>
-          <div class="col-3">
-            <h3>Lorem ipsum dolor sit.</h3> 
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum mollitia laborum dolore?
-            </p>
-          </div>
-          <div class="col-3">
-            <h3>Lorem, ipsum dolor.</h3> 
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex!
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!--Services End Testimonials Start--> 
-  <section>
-    <div class="container">
-      <div class="row">
-        <h1>Testimonials</h1>
-      </div>
-      <div class="row">
-        <div class="col-3">
-          <div class="coment">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil, unde.
-            </p>
-          </div>
-          <div class="person">
-            <h4>Lorem, ipsum dolor.
-            </h4> 
-            <div class="img-wrapper">
-              <img src="" alt="" />
+  </nav>
+  <!-- Navbar End Sidebar Start-->
+  <div class="container-fluid">
+    <div class="row flex-nowrap">
+        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                    <span class="fs-5 d-none d-sm-inline">Menu</span>
+                </a>
+                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link align-middle px-0">
+                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link px-0 align-middle">
+                            <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Orders</span></a>
+                    </li>
+                    <li>
+                        <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                            <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Bootstrap</span></a>
+                        <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+                            <li class="w-100">
+                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 1</a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
-          </div>
         </div>
-        <div class="col-3">
-          <div class="coment">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil, unde.
-            </p>
-          </div>
-          <div class="person">
-            <h4>Lorem, ipsum dolor.
-            </h4> 
-            <div class="img-wrapper">
-              <img src="" alt="" />
-            </div>
-          </div>
+        <div class="col py-3">
+            Content area...
         </div>
-        <div class="col-3">
-          <div class="coment">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil, unde.
-            </p>
-          </div>
-          <div class="person">
-            <h4>Lorem, ipsum dolor.
-            </h4> 
-            <div class="img-wrapper">
-              <img src="" alt="" />
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-  </section> 
-  <!-- Testimonials End Footer Start -->
-<footer>
-  <div class="container">
-  <div class="row">
-      <div class="col-6">
-    <div class="left">
-       <h1>Let's Work Together!</h1>
-    <h3>FIND ME SOCIAL ON MEDIA</h3>
-    <ul>
-      <li>FaceBook</li>
-      <li>Instagram</li>
-      <li>Twitter</li>
-      <li>LinkedIn</li>
-    </ul>
-    </div>
-  </div>
-  <div class="col-6">
-    <div class="right">
-      <div>
-        <h3>Write Me</h3>
-         <p>123 Anywhere St, Any City, Country Turkey</p>
-      </div>
-      <div>
-        <h3>Email Me</h3>
-         <p>test1313@gmail.com</p>
-      </div>
-      <div>
-        <h3>Call Me</h3>
-         <p>0(123) 456 7890</p>
-      </div>
-    </div>
-  </div>
-  </div>
 </div>
-</footer> 
-<!-- Footer End -->
-    <script src="app.js"></script>
+<footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top bg-dark text-light">
+  <div class="col mb-3">
+
+  </div>
+
+  <div class="col mb-3">
+    <h5>Section</h5>
+  </div>
+  <div class="col mb-3">
+    <h5>Section</h5>
+  </div>
+  <div class="col mb-3">
+    <h5>Section</h5>
+  </div>
+</footer>
+
 </body>
 </html>
