@@ -8,74 +8,58 @@
 </head>
 <body>
   <!------------Navbar Start-------->
-  <nav class="navbar navbar-expand-lg bg-dark">
-    <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        <a class="navbar-brand" href="#">Hidden brand</a>
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-        </ul>
-      </div>
-    </div>
+  <nav class="navbar  bg-info">
+     <div class="container-fluid">
+       <div class="container">
+         <ul class="d-flex list-group-horizontal justify-content-between navbar-nav mr-auto">
+           <li class="nav-item"><a class="nav-link border px-3 btn" href="#">Home</a></li>
+           <li class="nav-item"><a class="nav-link border-bottom  px-3" href="#">Personal Blog</a></li>
+           <li class="nav-item"><a class="  btn btn-success px-3" href="#">Admin</a></li>
+         </ul>
+       </div>
+     </div>
   </nav>
-  <!-- Navbar End Sidebar Start-->
-  <div class="container-fluid">
-    <div class="row flex-nowrap">
-        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
-            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                    <span class="fs-5 d-none d-sm-inline">Menu</span>
-                </a>
-                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link align-middle px-0">
-                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Orders</span></a>
-                    </li>
-                    <li>
-                        <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                            <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Bootstrap</span></a>
-                        <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
-                            <li class="w-100">
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 1</a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+  <!-- Navbar End Posts Start --> 
+  
+   <div class="post-list mt-5">
+        <div class="container">
+                    <div class="d-flex  p-5 bg-light list-group-horizontal justify-content-around">
+                        <div class="col-sm-2"><h2>Date</h2>
+                        </div>
+                        <div class="col-sm-3">
+                           <h2>Test</h2>
+                        </div>
+                        <div class="col-sm-3">
+                            <p class="d-inline-flex gap-1">
+  <a class="btn btn-primary" data-bs-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Read</a>
+                             </p>
+                        </div>
+                    </div>
+                    <div class="row">
+          <div class="col">
+           <div class="collapse multi-collapse" id="multiCollapseExample1">
+           <div class="card card-body">
+        Some placeholder content for the first collapse component of this multi-collapse example. This panel is hidden by default but revealed when the user activates the relevant trigger.
             </div>
-        </div>
-        <div class="col py-3">
-            Content area...
-        </div>
+          </div>
+       </div>
     </div>
-</div>
-<footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top bg-dark text-light">
-  <div class="col mb-3">
+  </div>
+  <!-- Posts End --> 
 
-  </div>
 
-  <div class="col mb-3">
-    <h5>Section</h5>
-  </div>
-  <div class="col mb-3">
-    <h5>Section</h5>
-  </div>
-  <div class="col mb-3">
-    <h5>Section</h5>
-  </div>
+<!--  Footer Start  -->
+<footer style=" 
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: #0dcaf0;
+   color: white;
+   text-align: center;" class="">
+  <p clas="text-center">&copy by Nevzat Atalay</p>
 </footer>
-
-</body>
+<!-- Footer End --> 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body> 
 </html>
