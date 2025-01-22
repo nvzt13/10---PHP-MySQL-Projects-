@@ -1,12 +1,15 @@
 import Image from 'next/image';
 import { FaRegEdit } from "react-icons/fa";
+import { CardProps } from '@/types/types';
+import Link from 'next/link';
 
-export default function Card({blog}) {
-  const { title, description, author, category, image } = blog;
-console.log(blog)
+export default function Card({ blog }: CardProps) {
+  const { id, title, html, author, category, image } = blog;
+
   return (
     <div className="bg-white border-0 shadow-lg rounded-lg overflow-hidden max-w-sm transform hover:scale-105 transition-transform duration-300 m-5 w-[250px]">
       <div className="relative">
+        {image && ( // Eğer image varsa, resmi göster
           <Image 
             src={image} 
             alt="Card image" 
@@ -14,15 +17,19 @@ console.log(blog)
             height={300}
             className="w-full h-auto object-cover"
           />
+        )}
       </div>
       <div className="p-4">
         <h6 className="text-sm text-gray-500">{category}</h6>
         <h1 className="text-xl font-bold text-gray-800 mt-1">{title}</h1>
-        <p className="text-gray-600 mt-2">{description}</p>
+        <p className="text-gray-600 mt-2">{html}</p>
         <div className="flex justify-between items-center mt-4">
-          <button className="text-white bg-black hover:bg-blue-600 font-medium py-2 px-5 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-colors">
-            Details
-          </button>
+          <Link 
+            href={`/blog-details?id=${id}`} // Doğru URL yapısı
+            className="text-white bg-black hover:bg-blue-600 font-medium py-2 px-5 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-colors"
+          >
+            Read
+          </Link>
           <FaRegEdit className="hover:text-gray-700 cursor-pointer transition-colors text-3xl" />
         </div>
       </div>

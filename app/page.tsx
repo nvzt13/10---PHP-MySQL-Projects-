@@ -4,7 +4,7 @@ import Card from '@/components/Card';
 
 export default function Home() {
   const [blogs, setBlogs] = useState([]);
-
+console.log(blogs)
   useEffect(() => {
     const storedBlogs = localStorage.getItem('blogs');
     if (storedBlogs) {

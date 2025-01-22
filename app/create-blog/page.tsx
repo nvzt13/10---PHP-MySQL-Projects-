@@ -1,12 +1,13 @@
 'use client';
-import { useState } from 'react';
+import { ContentEditableEvent } from 'react-simple-wysiwyg';
+import { useState, ChangeEvent, FormEvent } from 'react';
 import Editor from 'react-simple-wysiwyg';
+import { BlogData, BlogProps } from '@/types/types';
 
-function Blog({ html, setHtml }) {
-  function onChange(e) {
-    setHtml(e.target.value);
+function Blog({ html, setHtml }: BlogProps) {
+  function onChange(event: ContentEditableEvent) {
+    setHtml(event.target.value);
   }
-  localStorage.clear();
 
   return (
     <div className="mt-4">
@@ -29,43 +30,46 @@ function Blog({ html, setHtml }) {
 }
 
 export default function BlogForm() {
-  const [html, setHtml] = useState('');
-  const [title, setTitle] = useState('');
-  const [category, setCategory] = useState('');
-  const [author, setAuthor] = useState('');
-  const [image, setImage] = useState(null); // Image as base64
-  const [errorMessage, setErrorMessage] = useState('');
-  const [blogs, setBlogs] = useState(
-    JSON.parse(localStorage.getItem('blogs')) || []
-  );
+  const [html, setHtml] = useState<string>('');
+  const [title, setTitle] = useState<string>('');
+  const [category, setCategory] = useState<string>('');
+  const [author, setAuthor] = useState<string>('');
+  const [image, setImage] = useState<string | null>(null); // Image as base64
+  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [blogs, setBlogs] = useState<BlogData[]>(() => {
+    const storedBlogs = localStorage.getItem('blogs');
+    return storedBlogs ? JSON.parse(storedBlogs) : [];
+  });
 
   // Image file to base64 conversion
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
+  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setImage(reader.result); // Set image as base64 string
+        setImage(reader.result as string); // Set image as base64 string
       };
       reader.readAsDataURL(file);
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+  
     if (!html.trim()) {
       setErrorMessage('Blog içeriği zorunludur.');
       return;
     }
 
-    const newBlog = { title, category, author, image, html };
-
+    // Generate a unique ID for the new blog post
+    const id = Date.now(); // or use a library like uuid for unique IDs
+    const newBlog: BlogData = { id, title, category, author, image, html };
+  
     // Blog dizisini güncelle ve localStorage'a kaydet
     const updatedBlogs = [...blogs, newBlog];
     setBlogs(updatedBlogs);
     localStorage.setItem('blogs', JSON.stringify(updatedBlogs));
-
+  
     // Input alanlarını temizle
     setTitle('');
     setCategory('');
@@ -75,6 +79,7 @@ export default function BlogForm() {
     setErrorMessage('');
     
     console.log('Form gönderildi!', newBlog);
+    console.log('Güncellenmiş bloglar:', updatedBlogs); // Güncellenmiş blogları kontrol et
   };
 
   return (
@@ -107,17 +112,6 @@ export default function BlogForm() {
         </div>
 
         <div>
-          <label htmlFor="image" className="block text-sm font-medium text-gray-700">Image</label>
-          <input
-            id="image"
-            type="file"
-            onChange={handleImageChange}
-            className="w-full mt-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-300"
-            required
-          />
-        </div>
-
-        <div>
           <label htmlFor="author" className="block text-sm font-medium text-gray-700">Author</label>
           <input
             id="author"
@@ -137,9 +131,20 @@ export default function BlogForm() {
         {errorMessage && <p className="text-red-500 text-sm mt-2">{errorMessage}</p>}
       </div>
 
+      <div>
+        <label htmlFor="image" className="block text-sm font-medium text-gray-700">Image</label>
+        <input
+          id="image"
+          type="file"
+          onChange={handleImageChange}
+          className="w-full mt-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-300"
+          required
+        />
+      </div>
+
       {/* Preview of the uploaded image */}
       {image && (
-        <div className="mt-4">
+        <div className="mt-4 w-[250px] mx-auto">
           <p className="text-sm font-medium text-gray-700">Uploaded Image Preview:</p>
           <img src={image} alt="Uploaded Preview" className="mt-2 max-w-full h-auto" />
         </div>
