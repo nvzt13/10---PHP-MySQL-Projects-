@@ -1,20 +1,24 @@
-'use client'
+'use client';
 import { useState, useEffect } from "react";
 import Card from '@/components/Card';
+import { blogData } from '@/data/data';
+import { BlogCard } from '@/types/types';
 
 export default function Home() {
-  const [blogs, setBlogs] = useState([]);
+  const [blogs, setBlogs] = useState<BlogCard[]>([]); // Başlangıçta boş bir dizi
+const localData = localStorage.getItem('blogs');
+    const storedBlogs = localData ? JSON.parse(localData) : []; // localStorage'dan veriyi al ve parse et
+    const allBlogs = [...blogData, ...storedBlogs]; // 
+
   useEffect(() => {
-    const storedBlogs = localStorage.getItem('blogs');
-    if (storedBlogs) {
-      setBlogs(JSON.parse(storedBlogs));
-    }
+    setBlogs(allBlogs);
   }, []); 
+
   return (
-    <div className="flex flex-wrap justify-center">  
+    <div className="flex flex-wrap justify-center mt-24">  
       {blogs.length > 0 ? (
-        blogs.map((blog, index) => (
-          <Card key={index} blog={blog} />
+        blogs.map((blog) => (
+          <Card key={blog.id} blog={blog} />
         ))
       ) : (
         <p>No blogs available.</p>

@@ -1,15 +1,17 @@
-import Link from 'next/link'
+import Link from 'next/link';
 
-export default function Navbar () {
+export default function Navbar() {
   return (
-    <div className="flex bg-blue-200 p-3 font-sans justify-between font-bold">
+    <div className="flex fixed w-full top-0 items-center justify-between bg-gray-800 text-white p-4 shadow-md">
       <div>
-        <h1> Personal Blog App</h1>
+        <Link href="/">
+        <h1 className="text-white text-2xl font-bold">Personal Blog App</h1>
+        </Link>
       </div>
       <div>
-        <Link href="/" className="mx-2" >Home</Link>
-        <Link href="/create-blog" className="mx-2">Create Blog</Link>
+        <Link href="/" className="text-white mx-4 hover:text-blue-300 transition duration-200">Home</Link>
+        <Link href="/create-blog" className="text-white mx-4 hover:text-blue-300 transition duration-200">Create Blog</Link>
       </div>
     </div>
-    )
+  );
 }

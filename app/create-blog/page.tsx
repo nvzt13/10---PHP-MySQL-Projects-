@@ -1,39 +1,14 @@
 'use client';
-import { ContentEditableEvent } from 'react-simple-wysiwyg';
 import { useState, ChangeEvent, FormEvent } from 'react';
-import Editor from 'react-simple-wysiwyg';
-import { BlogData, BlogProps } from '@/types/types';
-
-  function Blog({ html, setHtml }: BlogProps) {
-  function onChange(event: ContentEditableEvent) {
-    setHtml(event.target.value);
-  }
-
-  return (
-    <div className="mt-4">
-      <Editor
-        value={html}
-        onChange={onChange}
-        style={{ 
-          border: '1px solid #ccc', 
-          borderRadius: '8px', 
-          padding: '12px', 
-          minHeight: '200px', 
-          fontFamily: 'inherit',
-          backgroundColor: '#f9fafb',
-          outline: 'none',
-          boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
-        }}
-      />
-    </div>
-  );
-}
+import { BlogData } from '@/types/types';
+import Wysiwyg from '@/components/Wysivyg';
 
 export default function BlogForm() {
-  const [html, setHtml] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
   const [title, setTitle] = useState<string>('');
   const [category, setCategory] = useState<string>('');
   const [author, setAuthor] = useState<string>('');
+  const [id] = useState<number>(Date.now());
   const [image, setImage] = useState<string | null>(null); // Image as base64
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [blogs, setBlogs] = useState<BlogData[]>(() => {
@@ -56,14 +31,13 @@ export default function BlogForm() {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   
-    if (!html.trim()) {
+    if (!description.trim()) {
       setErrorMessage('Blog içeriği zorunludur.');
       return;
     }
 
     // Generate a unique ID for the new blog post
-    const id = Date.now(); // or use a library like uuid for unique IDs
-    const newBlog: BlogData = { id, title, category, author, image, html };
+    const newBlog: BlogData = { id, title, category, author, image, description };
   
     // Blog dizisini güncelle ve localStorage'a kaydet
     const updatedBlogs = [...blogs, newBlog];
@@ -75,7 +49,7 @@ export default function BlogForm() {
     setCategory('');
     setAuthor('');
     setImage(null);
-    setHtml('');
+    setDescription('');
     setErrorMessage('');
     
     console.log('Form gönderildi!', newBlog);
@@ -83,7 +57,7 @@ export default function BlogForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-xl mx-auto bg-white shadow-md p-6 rounded-lg mt-8 space-y-6">
+    <form onSubmit={handleSubmit} className="max-w-xl mt-28 mx-auto bg-white shadow-md p-6 rounded-lg space-y-6 mb-24">
       <div>
         <label htmlFor="title" className="block text-sm font-medium text-gray-700">Title</label>
         <input
@@ -92,7 +66,7 @@ export default function BlogForm() {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           className="w-full mt-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-300"
-          placeholder="Enter title"
+          placeholder ="Enter title"
           required
         />
       </div>
@@ -127,7 +101,7 @@ export default function BlogForm() {
 
       <div>
         <label htmlFor="blog" className="block text-sm font-medium text-gray-700">Blog</label>
-        <Blog html={html} setHtml={setHtml} />
+        <Wysiwyg html={description} setHtml={setDescription} />
         {errorMessage && <p className="text-red-500 text-sm mt-2">{errorMessage}</p>}
       </div>
 

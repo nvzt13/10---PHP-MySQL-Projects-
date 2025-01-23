@@ -4,19 +4,20 @@ export interface BlogProps {
   }
   
   export  interface BlogData {
+    id: number,
     title: string;
     category: string;
     author: string;
     image: string | null; // Image as base64
-    html: string;
+    description: string;
   }
 export interface BlogCard {
+  id: number
   title: string;
   category: string;
   author: string;
   image: string | null; // Image as base64
-  html: string;
-  id: number
+  description: string;
 }
 
 // Card bileşeninin props'larını tanımlıyoruz

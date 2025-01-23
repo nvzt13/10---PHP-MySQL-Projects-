@@ -4,7 +4,9 @@ import { CardProps } from '@/types/types';
 import Link from 'next/link';
 
 export default function Card({ blog }: CardProps) {
-  const { id, title, html, author, category, image } = blog;
+  const { id, title, description, author, category, image } = blog;
+
+  const defaultBlos = id === 1 || id === 2 || id === 3;
 
   return (
     <div className="bg-white border-0 shadow-lg rounded-lg overflow-hidden max-w-sm h-[450px] transform hover:scale-105 transition-transform duration-300 m-5 w-[250px]">
@@ -23,20 +25,23 @@ export default function Card({ blog }: CardProps) {
         <div>
           <h6 className="text-sm text-gray-500">{category}</h6>
           <h1 className="text-xl font-bold text-gray-800 mt-1 line-clamp-1">{title}</h1>
-          <p className="text-gray-600 mt-2 line-clamp-2">{html}</p>
+          <p className="text-gray-600 mt-2 line-clamp-2">{description}</p>
         </div>
         <div className="flex justify-between items-center mt-4">
           <Link 
-            href={`/blog-details?id=${id}`}
+            href={`/blog/read?id=${id}`}
             className="text-white bg-black hover:bg-blue-600 font-medium py-2 px-5 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition-colors"
           >
             Read
           </Link>
-          <Link
-            href={`/blog-details/edit?id=${id}`}
-              >
-             <FaRegEdit className="hover:text-gray-700 cursor-pointer transition-colors text-3xl" />
-</Link>
+          {
+            defaultBlos ? 
+             null
+            :<Link
+            href={`/blog/edit?id=${id}`}
+              ><FaRegEdit className="hover:text-gray-700 cursor-pointer transition-colors text-3xl" />
+            </Link> 
+          }
         </div>
       </div>
       <div className="p-4 bg-gray-100">
