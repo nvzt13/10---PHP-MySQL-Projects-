@@ -1,20 +1,39 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
-import Wysiwyg from '@/components/Wysivyg'
-import {blogData} from '@/data/data'
+import Wysiwyg from '@/components/Wysivyg';
+import { blogData } from '@/data/data';
+import { BlogCard } from '@/types/types';
 
 export default function EditBlog() {
   const param = useSearchParams();
   const id = param.get('id');
-  const [blog, setBlog] = useState<any>(null);
+  const [blog, setBlog] = useState<BlogCard>();
   const [description, setDescription] = useState<string>('');
   const [title, setTitle] = useState<string>('');
   const [category, setCategory] = useState<string>('');
   const [author, setAuthor] = useState<string>('');
   const [image, setImage] = useState<string | null>(null);
 
-  // resmi base 64 formatına çevirme
+  // localStorage ve blog datadan blogları al ve id'ye göre blogu bul
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const localData = localStorage.getItem('blogs');
+      const storedBlogs = localData ? JSON.parse(localData) : []; // localStorage'dan veriyi al ve parse et
+      const allBlogs = [...blogData, ...storedBlogs]; // blogData ve localStorage'daki blogları birleştir
+      
+      const selectedBlog = allBlogs.find((item: BlogCard) => item.id === Number(id));
+      if (selectedBlog) {
+        setBlog(selectedBlog);
+        setTitle(selectedBlog.title);
+        setCategory(selectedBlog.category);
+        setAuthor(selectedBlog.author);
+        setDescription(selectedBlog.description);
+      }
+    }
+  }, [id]);
+
+  // resmi base64 formatına çevirme
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const file = e.target.files[0];
@@ -26,22 +45,6 @@ export default function EditBlog() {
     }
   };
 
-  // local storage ve blog datadan blogları al ve id'ye göre blogu bul
-  useEffect(() => {
-     const localData = localStorage.getItem('blogs');
-     const storedBlogs = localData ? JSON.parse(localData) : []; // localStorage'dan veriyi al ve parse et
-     const allBlogs = [...blogData, ...storedBlogs]; // blogData ve 
-
-    const selectedBlog = allBlogs.find((item: any) => item.id === Number(id));
-    if (selectedBlog) {
-      setBlog(selectedBlog);
-      setTitle(selectedBlog.title);
-      setCategory(selectedBlog.category);
-      setAuthor(selectedBlog.author);
-      setDescription(selectedBlog.description);
-    }
-  }, [id]);
-
   if (!blog) {
     return <div>Loading...</div>;
   }
@@ -49,14 +52,14 @@ export default function EditBlog() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const updatedBlog = { ...blog, title, category, author, description, image };
-    const blogs = JSON.parse(localStorage.getItem("blogs") || '[]');
-    const updatedBlogs = blogs.map((item: any) =>
+    const blogs = JSON.parse(localStorage.getItem('blogs') || '[]');
+    const updatedBlogs = blogs.map((item: BlogCard) =>
       item.id === blog.id ? updatedBlog : item
     );
-    localStorage.setItem("blogs", JSON.stringify(updatedBlogs));
+    localStorage.setItem('blogs', JSON.stringify(updatedBlogs));
     alert('Blog updated!');
 
-    // Reset form values
+    // Form değerlerini sıfırlama
     setTitle('');
     setCategory('');
     setAuthor('');
@@ -65,13 +68,12 @@ export default function EditBlog() {
   };
 
   const handleDelete = () => {
-
-    const blogs = JSON.parse(localStorage.getItem("blogs") || '[]');
-    const updatedBlogs = blogs.filter((item: any) => item.id !== blog.id);
-    localStorage.setItem("blogs", JSON.stringify(updatedBlogs));
+    const blogs = JSON.parse(localStorage.getItem('blogs') || '[]');
+    const updatedBlogs = blogs.filter((item: BlogCard) => item.id !== blog.id);
+    localStorage.setItem('blogs', JSON.stringify(updatedBlogs));
     alert('Blog deleted!');
 
-    // Reset form values after deletion
+    // Silme işleminden sonra form değerlerini sıfırlama
     setTitle('');
     setCategory('');
     setAuthor('');
@@ -124,9 +126,7 @@ export default function EditBlog() {
 
       <div>
         <label htmlFor="blog" className="block text-sm font-medium text-gray-700">Blog</label>
-       <Wysiwyg html={description} setHtml={setDescription} 
-       />
-        
+        <Wysiwyg html={description} setHtml={setDescription} />
       </div>
 
       <div>
@@ -146,7 +146,7 @@ export default function EditBlog() {
           <img src={image} alt="Uploaded Preview" className="mt-2 max-w-full h-auto" />
         </div>
       )}
-      <div className="flex ">
+      <div className="flex">
         <button
           type="submit"
           className="m-4 w-full bg-green-500 text-white py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-green-400 transition duration-300"
@@ -154,7 +154,7 @@ export default function EditBlog() {
           Update
         </button>
         <button
-          type="button" // Use 'button' type to avoid form submission
+          type="button"
           onClick={handleDelete}
           className="m-4 w-full bg-red-500 text-white py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-300"
         >

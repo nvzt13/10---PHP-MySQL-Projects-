@@ -1,5 +1,5 @@
 'use client';
-import { useState, ChangeEvent, FormEvent } from 'react';
+import { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { BlogData } from '@/types/types';
 import Wysiwyg from '@/components/Wysivyg';
 
@@ -11,10 +11,15 @@ export default function BlogForm() {
   const [id] = useState<number>(Date.now());
   const [image, setImage] = useState<string | null>(null); // Image as base64
   const [errorMessage, setErrorMessage] = useState<string>('');
-  const [blogs, setBlogs] = useState<BlogData[]>(() => {
+  const [blogs, setBlogs] = useState<BlogData[]>([]);
+
+  // localStorage işlemlerini sadece istemci tarafında gerçekleştirmek için useEffect kullanıyoruz
+  useEffect(() => {
     const storedBlogs = localStorage.getItem('blogs');
-    return storedBlogs ? JSON.parse(storedBlogs) : [];
-  });
+    if (storedBlogs) {
+      setBlogs(JSON.parse(storedBlogs));
+    }
+  }, []);
 
   // Image file to base64 conversion
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -30,7 +35,7 @@ export default function BlogForm() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-  
+
     if (!description.trim()) {
       setErrorMessage('Blog içeriği zorunludur.');
       return;
@@ -38,12 +43,12 @@ export default function BlogForm() {
 
     // Generate a unique ID for the new blog post
     const newBlog: BlogData = { id, title, category, author, image, description };
-  
+
     // Blog dizisini güncelle ve localStorage'a kaydet
     const updatedBlogs = [...blogs, newBlog];
     setBlogs(updatedBlogs);
     localStorage.setItem('blogs', JSON.stringify(updatedBlogs));
-  
+
     // Input alanlarını temizle
     setTitle('');
     setCategory('');
@@ -51,7 +56,7 @@ export default function BlogForm() {
     setImage(null);
     setDescription('');
     setErrorMessage('');
-    
+
     console.log('Form gönderildi!', newBlog);
     console.log('Güncellenmiş bloglar:', updatedBlogs); // Güncellenmiş blogları kontrol et
   };
@@ -66,7 +71,7 @@ export default function BlogForm() {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           className="w-full mt-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-300"
-          placeholder ="Enter title"
+          placeholder="Enter title"
           required
         />
       </div>

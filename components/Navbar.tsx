@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function Navbar() {
   return (
-    <div className="flex fixed w-full top-0 items-center justify-between bg-gray-800 text-white p-4 shadow-md">
+    <div className="flex fixed w-full top-0 items-center z-[50]  justify-between bg-gray-800 text-white p-4 shadow-md">
       <div>
         <Link href="/">
         <h1 className="text-white text-2xl font-bold">Personal Blog App</h1>
