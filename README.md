@@ -16,6 +16,7 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+### What can you do?
 - You can see and read sample blogs
 - You can create your own blog post
 - You can edit and delete blogs you have created
