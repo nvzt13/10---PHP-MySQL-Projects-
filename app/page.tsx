@@ -5,26 +5,30 @@ import { blogData } from '@/data/data';
 import { BlogCard } from '@/types/types';
 
 export default function Home() {
-  const [blogs, setBlogs] = useState<BlogCard[]>([]); // Başlangıçta boş bir dizi
+  const [blogs, setBlogs] = useState<BlogCard[]>([]);
+  const [loading, setLoading] = useState<boolean>(true); // Add loading state
 
   useEffect(() => {
-    if (typeof window !== 'undefined') { // Tarayıcıda olduğumuzdan emin olun
+    if (typeof window !== 'undefined') {
       const localData = localStorage.getItem('blogs');
-      const storedBlogs = localData ? JSON.parse(localData) : []; // localStorage'dan veriyi al ve parse et
-      const allBlogs = [...blogData, ...storedBlogs]; // blogData ve localStorage'daki blogları birleştir
-      setBlogs(allBlogs); // Blogları state'e set et
+      const storedBlogs = localData ? JSON.parse(localData) : [];
+      const allBlogs = [...blogData, ...storedBlogs];
+      setBlogs(allBlogs);
+      setLoading(false); // Set loading to false once the blogs are fetched
     }
-  }, []); // useEffect sadece ilk renderda çalışacak
+  }, []);
 
   return (
-    <div className="flex flex-wrap justify-center mt-24">
-      {blogs.length > 0 ? (
-        blogs.map((blog) => (
-          <Card key={blog.id} blog={blog} />
-        ))
-      ) : (
-        <p>No blogs available.</p>
-      )}
+    <div className="flex justify-center items-center w-full mt-24">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {loading ? (
+          <p>Loading blogs...</p> // Show loading message
+        ) : (
+          blogs.map((blog) => (
+            <Card key={blog.id} blog={blog} />
+          ))
+        )}
+      </div>
     </div>
   );
 }

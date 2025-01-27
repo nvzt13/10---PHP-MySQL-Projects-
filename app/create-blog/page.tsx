@@ -57,8 +57,7 @@ export default function BlogForm() {
     setDescription('');
     setErrorMessage('');
 
-    console.log('Form gönderildi!', newBlog);
-    console.log('Güncellenmiş bloglar:', updatedBlogs); // Güncellenmiş blogları kontrol et
+    alert('Blog oluşturuldu!');
   };
 
   return (
