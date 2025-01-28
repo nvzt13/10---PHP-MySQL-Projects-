@@ -5,13 +5,10 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 First, run the development server:
 
 ```bash
+git clone https://github.com/nvzt13/Personal-Blog-App.git
+cd Personal-Blog-App
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
@@ -21,4 +18,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - You can create your own blog post
 - You can edit and delete blogs you have created
 
-<img src="" />
+<img src="blog.png" />
